@@ -1,9 +1,24 @@
-var myInterval = setInterval(myTimer, 1000);
-function myTimer() {
-    var clock = new clock();
-    document.getElementById("demo").innerHTML = clock.toLocaleTimeString();
+var timerEl = document.getElementById('countdown');
+var mainEl = document.getElementById('main');
+
+function countdown() {
+    var timeLeft = 75;
+
+    var timeInterval = setInterval(function() {
+        
+        timerEl.textContent = "Time: " + timeLeft + " seconds"
+        timeLeft--;
+
+        if (timeLeft === -1) {
+            timerEl.textContent = "Time's up!";
+            clearInterval(timeInterval);
+            resultsPage()
+        }
+    } ,1000);
 }
 
-function myStopFunction() {
-    clearInterval(myInterval);
+function resultsPage() {
+    //use this function to move to the results page
 }
+
+countdown();

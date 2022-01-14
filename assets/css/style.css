@@ -23,6 +23,12 @@ button {
     font-size: 22px;
 }
 
+header {
+    text-align: right;
+    margin: 15px auto;
+    padding: 15px;
+}
+
 .wrapper {
     display: flex;
 }
@@ -35,7 +41,12 @@ button {
     padding: 25px;
 }
 
+.title {
+    font-size: 35px;
+}
+
 .title h4{
     color: var(--tertiary-color);
+    font-size: px;
 }
 
