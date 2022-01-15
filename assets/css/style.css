@@ -18,7 +18,7 @@ body {
 
 button {
     padding: 10px;
-    margin: 24px;
+    margin: 5px;
     cursor: pointer;
     font-size: 22px;
 }
@@ -29,6 +29,9 @@ header {
     padding: 15px;
 }
 
+.quiz-contents p {
+    padding: 25px;
+}
 .wrapper {
     display: flex;
 }
