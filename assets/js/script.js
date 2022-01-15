@@ -4,7 +4,7 @@ var mainEl = document.getElementById('main');
 var buttonEl = document.querySelector("#proceed-button");
 buttonEl.addEventListener("click", function() {
     countdown()
-    questionOne()
+    nextQuestion()
     });
 
 function countdown() {
@@ -24,34 +24,37 @@ function countdown() {
 }
 
 
-function questionOne() {
-var nextEl = document.querySelector("#question");
-var question1El = document.createElement("h4");
-question1El.textContent = "What does 'DOM' stand for?";
-question1El.className ="title";
-nextEl.appendChild(question1El)
-
-var answersEl = document.querySelector("#question");
-var answer1El = document.createElement("button");
-var answer2El = document.createElement("button");
-var answer3El = document.createElement("button");
-var answer4El = document.createElement("button");
-answer1El.textContent = "1) Designated Operating Model";
-answer2El.textContent = "2) Document Object Model";
-answer3El.textContent = "3) Deliberate Operations Module";
-answer4El.textContent = "4) Documented Objective Mode";
-answer1El.className = "btn";
-answer2El.className = "btn";
-answer3El.className = "btn";
-answer4El.className = "btn";
-answersEl.appendChild(answer1El)
-answersEl.appendChild(answer2El)
-answersEl.appendChild(answer3El)
-answersEl.appendChild(answer4El)
-
-
+var question1Obj = {
+    question: "What does 'DOM' stand for?",
+    answer1: "1) Designated Operating Model",
+    answer2: "2) Document Object Model",
+    answer3: "3) Deliberate Operations Module",
+    answer4: "4) Documented Objective Mode",
 };
 
+function nextQuestion() {
+    document.getElementById("question").innerText = question1Obj.question
+    document.getElementById("intro").innerText = ""
+    
+    document.getElementById("proceed-button").textContent = ""
+    document.getElementById("quiz-contents").appendChild
+    var button1 = document.createElement("button");
+    var button2 = document.createElement("button");
+    var button3 = document.createElement("button");
+    var button4 = document.createElement("button");
+    button1.textContent = question1Obj.answer1;
+    button2.textContent = question1Obj.answer2;
+    button3.textContent = question1Obj.answer3;
+    button4.textContent = question1Obj.answer4;
+    button1.className = "btn";
+    button2.className = "btn";
+    button3.className = "btn";
+    button4.className = "btn";
+    document.getElementById("quiz-contents").appendChild(button1);
+    document.getElementById("quiz-contents").appendChild(button2);
+    document.getElementById("quiz-contents").appendChild(button3);
+    document.getElementById("quiz-contents").appendChild(button4);
+} 
 
 //function resultsPage() {}
     //use this function to move to the results page

@@ -50,6 +50,9 @@ header {
 
 .title h4{
     color: var(--tertiary-color);
-    font-size: px;
 }
 
+.title p {
+    font-size: 20px;
+    font-weight: lighter;
+}
