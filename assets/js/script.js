@@ -24,7 +24,22 @@ function countdown() {
 }
 
 
+
 var question1Obj = {
+    question: "What does 'DOM' stand for?",
+    answer1: "1) Designated Operating Model",
+    answer2: "2) Document Object Model",
+    answer3: "3) Deliberate Operations Module",
+    answer4: "4) Documented Objective Mode",
+};
+var question2Obj = {
+    question: "2What does 'DOM' stand for?",
+    answer1: "1) 2Designated Operating Model",
+    answer2: "2) 2Document Object Model",
+    answer3: "3) 2Deliberate Operations Module",
+    answer4: "4) 2Documented Objective Mode",
+};
+var question3Obj = {
     question: "What does 'DOM' stand for?",
     answer1: "1) Designated Operating Model",
     answer2: "2) Document Object Model",
@@ -34,9 +49,9 @@ var question1Obj = {
 
 function nextQuestion() {
     document.getElementById("question").innerText = question1Obj.question
-    document.getElementById("intro").innerText = ""
-    
-    document.getElementById("proceed-button").textContent = ""
+    document.getElementById("intro").remove()
+    document.getElementById("proceed-button").remove()
+
     document.getElementById("quiz-contents").appendChild
     var button1 = document.createElement("button");
     var button2 = document.createElement("button");
@@ -50,10 +65,29 @@ function nextQuestion() {
     button2.className = "btn";
     button3.className = "btn";
     button4.className = "btn";
+    button1.id = "q1b1";
+    button2.id = "q1b2";
+    button3.id = "q1b3";
+    button4.id = "q1b4";
     document.getElementById("quiz-contents").appendChild(button1);
     document.getElementById("quiz-contents").appendChild(button2);
     document.getElementById("quiz-contents").appendChild(button3);
     document.getElementById("quiz-contents").appendChild(button4);
+
+    button2.addEventListener("click", function() {
+        alert("Correct!")
+        question2()
+    });
+} 
+
+function question2() {
+    document.getElementById("question").innerText = question2Obj.question
+    document.getElementById("q1b1").innerText = question2Obj.answer1
+    document.getElementById("q1b2").innerText = question2Obj.answer2
+    document.getElementById("q1b3").innerText = question2Obj.answer3
+    document.getElementById("q1b4").innerText = question2Obj.answer4
+   
+
 } 
 
 //function resultsPage() {}
