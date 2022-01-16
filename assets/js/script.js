@@ -18,10 +18,10 @@ function countdown() {
         timerEl.textContent = "Time: " + timeLeft + " seconds"
         timeLeft--;
 
-        if (timeLeft === -1) {
+        if (timeLeft <= -1) {
             timerEl.textContent = "Time's up!";
             clearInterval(timeInterval);
-            resultsPage()
+            endGame()
         }
     } ,1000);
 }
@@ -92,38 +92,30 @@ function nextQuestion() {
         document.getElementById("b3").innerText = questionBank[i].options[2]
         document.getElementById("b4").innerText = questionBank[i].options[3]
      
-    } //else if {
-
-   //}
+    } else {
+        endGame()
+    }
 
 };
 
 
-function correct (){
-
+function correct() {
     // element to appear that says "correct!"
     document.getElementById("message").innerText = "Correct!"
-
     // add score++
     score++
     console.log(score)
-
     // proceed with nextQuestion
     nextQuestion()
-    
-
 };
 
-function incorrect (){
+function incorrect() {
     // element to appear that says "wrong!"
     document.getElementById("message").innerText = "Wrong!"
-
     // subtract time 
     timeLeft = timeLeft - 10;
-
     // proceed with nextQuestion
     nextQuestion()
-    
 };
 
 
@@ -195,8 +187,21 @@ function startGame() {
 
 
 
-//function resultsPage() {}
-    //use this function to move to the results page
+function endGame() {
+    // changing question to say "All done!"
+    document.getElementById("question").innerText = "All done!"
 
+    // remove the buttons
+    document.getElementById("b1").remove()
+    document.getElementById("b2").remove()
+    document.getElementById("b3").remove()
+    document.getElementById("b4").remove()
+    document.getElementById("message").remove()
+    // add score print out
+    
+    // addform for initials
 
-//countdown();
+    //var form = document.createElement("form")
+}
+    
+//function resultsPage() 
