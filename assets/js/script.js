@@ -1,6 +1,7 @@
 var timerEl = document.getElementById('countdown');
 var mainEl = document.getElementById('main');
 var score = 0;
+var i = 0;
 
 var buttonEl = document.querySelector("#proceed-button");
 buttonEl.addEventListener("click", function() {
@@ -82,11 +83,9 @@ var questionBank = [
     options: ["Designated Operating Model", "Document Object Model", "Deliberate Operations Module", "Documented Objective Mode"],
     correctAnswer: 1
     },
-
-    
 ];
 
-var i = 0;
+
 
 function nextQuestion() {
     
@@ -104,41 +103,79 @@ function nextQuestion() {
 
 };
 
- 
-//function addScore {
+
+function correct (){
+    //when button[i] == correctAnswer
+    alert("ya")
+
+    // element to appear that says "correct!"
+
+    // add score++
+
+    // proceed with nextQuestion
+};
+
+function incorrect (){
+    alert("nah")
+};
 
 
 function startGame() {
     document.getElementById("question").innerText = questionBank[i].questionText;
 
     document.getElementById("quiz-contents").appendChild
+    var button0 = document.createElement("button");
     var button1 = document.createElement("button");
     var button2 = document.createElement("button");
     var button3 = document.createElement("button");
-    var button4 = document.createElement("button");
-    button1.textContent = questionBank[i].options[0];
-    button2.textContent = questionBank[i].options[1];
-    button3.textContent = questionBank[i].options[2];
-    button4.textContent = questionBank[i].options[3];
+    button0.textContent = questionBank[i].options[0];
+    button1.textContent = questionBank[i].options[1];
+    button2.textContent = questionBank[i].options[2];
+    button3.textContent = questionBank[i].options[3];
+    button0.className = "btn";
     button1.className = "btn";
     button2.className = "btn";
     button3.className = "btn";
-    button4.className = "btn";
-    button1.id = "b1";
-    button2.id = "b2";
-    button3.id = "b3";
-    button4.id = "b4";
+    button0.id = "b1";
+    button1.id = "b2";
+    button2.id = "b3";
+    button3.id = "b4";
+    document.getElementById("quiz-contents").appendChild(button0);
     document.getElementById("quiz-contents").appendChild(button1);
     document.getElementById("quiz-contents").appendChild(button2);
     document.getElementById("quiz-contents").appendChild(button3);
-    document.getElementById("quiz-contents").appendChild(button4);
 
     document.getElementById("intro").remove()
     document.getElementById("proceed-button").remove()
 
-    button2.addEventListener("click", function() {
-    nextQuestion()
-    });
+ 
+    switch (questionBank[i].correctAnswer) {
+        case 0:
+            button0.addEventListener("click", correct);
+            break;
+        case 1:
+            button1.addEventListener("click", correct);
+            break;
+        case 2:
+            button2.addEventListener("click", correct);
+            break;
+        case 3:
+            button3.addEventListener("click", correct);
+            break;
+    } 
+
+    if (questionBank[i].correctAnswer !== 0) {
+        button0.addEventListener("click", incorrect)
+    } 
+    if (questionBank[i].correctAnswer !== 1) {
+        button1.addEventListener("click", incorrect)
+    } 
+    if (questionBank[i].correctAnswer !== 2) {
+        button2.addEventListener("click", incorrect)
+    } 
+    if (questionBank[i].correctAnswer !== 3) {
+        button3.addEventListener("click", incorrect)
+    }
 
 } 
 
