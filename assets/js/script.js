@@ -1,10 +1,11 @@
 var timerEl = document.getElementById('countdown');
 var mainEl = document.getElementById('main');
+var score = 0;
 
 var buttonEl = document.querySelector("#proceed-button");
 buttonEl.addEventListener("click", function() {
     countdown()
-    nextQuestion()
+    startGame()
     });
 
 function countdown() {
@@ -23,72 +24,125 @@ function countdown() {
     } ,1000);
 }
 
+// var testQue = Object.keys(answer1);
+// console.log(testQue)
 
 
-var question1Obj = {
-    question: "What does 'DOM' stand for?",
-    answer1: "1) Designated Operating Model",
-    answer2: "2) Document Object Model",
-    answer3: "3) Deliberate Operations Module",
-    answer4: "4) Documented Objective Mode",
-};
-var question2Obj = {
-    question: "2What does 'DOM' stand for?",
-    answer1: "1) 2Designated Operating Model",
-    answer2: "2) 2Document Object Model",
-    answer3: "3) 2Deliberate Operations Module",
-    answer4: "4) 2Documented Objective Mode",
-};
-var question3Obj = {
-    question: "What does 'DOM' stand for?",
-    answer1: "1) Designated Operating Model",
-    answer2: "2) Document Object Model",
-    answer3: "3) Deliberate Operations Module",
-    answer4: "4) Documented Objective Mode",
-};
+// //iterate over keys
+// for (let i = 0; i< testVar.length; i++) {
+//     testVar2 = testVar[i] //iterate over key
+//     testvar3 = scores.[testVar2]; // passing key into
+// }
+
+ 
+var questionBank = [
+
+    { 
+    questionText: "What does 'DOM' stand for?",
+    options: ["Designated Operating Model", "Document Object Model", "Deliberate Operations Module", "Documented Objective Mode"],
+    correctAnswer: 1
+    },
+    { 
+    questionText: "What is an event listener used for?",
+    options: ["the observation of an event", "data", "a response to an event", "create an HTML element"],
+    correctAnswer: 0
+    },
+    { 
+    questionText: "question 3?",
+    options: ["Dsdfel", "Dsfodel", "DeliberatsdfModule", "DocumsdfMode"],
+    correctAnswer: 1
+    },
+    { 
+    questionText: "question 4?",
+    options: ["ya", "ok", "raer", "dsfa"],
+    correctAnswer: 1
+    },
+    { 
+    questionText: "question 5?",
+    options: ["Desigfsdodel", "Docufdt Model", "Deliberasdfations Module", "Docufdstive Mode"],
+    correctAnswer: 1
+    },
+    { 
+    questionText: "sadf?",
+    options: ["Desasdf Model", "Documeadfodel", "Deliberatfds Module", "Documensdfe Mode"],
+    correctAnswer: 1
+    },
+    { 
+    questionText: "What does 'DOM' stand for?",
+    options: ["Designated Operating Model", "Document Object Model", "Deliberate Operations Module", "Documented Objective Mode"],
+    correctAnswer: 1
+    },
+    { 
+    questionText: "What does 'DOM' stand for?",
+    options: ["Designated Operating Model", "Document Object Model", "Deliberate Operations Module", "Documented Objective Mode"],
+    correctAnswer: 1
+    },
+    { 
+    questionText: "What does 'DOM' stand for?",
+    options: ["Designated Operating Model", "Document Object Model", "Deliberate Operations Module", "Documented Objective Mode"],
+    correctAnswer: 1
+    },
+
+    
+];
+
+var i = 0;
 
 function nextQuestion() {
-    document.getElementById("question").innerText = question1Obj.question
-    document.getElementById("intro").remove()
-    document.getElementById("proceed-button").remove()
+    
+    if (i < questionBank.length) {
+        i++;
+        document.getElementById("question").innerText = questionBank[i].questionText
+        document.getElementById("b1").innerText = questionBank[i].options[0]
+        document.getElementById("b2").innerText = questionBank[i].options[1]
+        document.getElementById("b3").innerText = questionBank[i].options[2]
+        document.getElementById("b4").innerText = questionBank[i].options[3]
+     
+    } //else if {
+
+   //}
+
+};
+
+ 
+//function addScore {
+
+
+function startGame() {
+    document.getElementById("question").innerText = questionBank[i].questionText;
 
     document.getElementById("quiz-contents").appendChild
     var button1 = document.createElement("button");
     var button2 = document.createElement("button");
     var button3 = document.createElement("button");
     var button4 = document.createElement("button");
-    button1.textContent = question1Obj.answer1;
-    button2.textContent = question1Obj.answer2;
-    button3.textContent = question1Obj.answer3;
-    button4.textContent = question1Obj.answer4;
+    button1.textContent = questionBank[i].options[0];
+    button2.textContent = questionBank[i].options[1];
+    button3.textContent = questionBank[i].options[2];
+    button4.textContent = questionBank[i].options[3];
     button1.className = "btn";
     button2.className = "btn";
     button3.className = "btn";
     button4.className = "btn";
-    button1.id = "q1b1";
-    button2.id = "q1b2";
-    button3.id = "q1b3";
-    button4.id = "q1b4";
+    button1.id = "b1";
+    button2.id = "b2";
+    button3.id = "b3";
+    button4.id = "b4";
     document.getElementById("quiz-contents").appendChild(button1);
     document.getElementById("quiz-contents").appendChild(button2);
     document.getElementById("quiz-contents").appendChild(button3);
     document.getElementById("quiz-contents").appendChild(button4);
 
+    document.getElementById("intro").remove()
+    document.getElementById("proceed-button").remove()
+
     button2.addEventListener("click", function() {
-        alert("Correct!")
-        question2()
+    nextQuestion()
     });
-} 
-
-function question2() {
-    document.getElementById("question").innerText = question2Obj.question
-    document.getElementById("q1b1").innerText = question2Obj.answer1
-    document.getElementById("q1b2").innerText = question2Obj.answer2
-    document.getElementById("q1b3").innerText = question2Obj.answer3
-    document.getElementById("q1b4").innerText = question2Obj.answer4
-   
 
 } 
+
+
 
 //function resultsPage() {}
     //use this function to move to the results page
