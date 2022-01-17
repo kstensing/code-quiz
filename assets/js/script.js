@@ -3,6 +3,7 @@ var mainEl = document.getElementById('main');
 var score = 0;
 var i = 0;
 var timeLeft = 75;
+var highScore = ""
 
 // button to begin the timer
 var buttonEl = document.querySelector("#proceed-button");
@@ -204,7 +205,22 @@ function endGame() {
     document.getElementById("question").appendChild(scorePrint);
   
     // addform for initials
+    var form = document.createElement("form");
+    //form.setAttribute(score, "initials");
+    var initials = document.createElement("input");
+    initials.setAttribute("type", "text");
+    initials.setAttribute("name", "initial");
+    initials.setAttribute("placeholder", "Initials");
+    var submit = document.createElement("input");
+    submit.setAttribute("type", "submit");
+    submit.setAttribute("value", "Submit");
+    document.getElementById("results").appendChild(form);
+    form.appendChild(initials);
+    form.appendChild(submit);
+  
+    // need to take initials, add it with the high score, and save it to the resultsPage
 
+    
     //var form = document.createElement("form")
 }
     
