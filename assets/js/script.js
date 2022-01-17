@@ -198,7 +198,11 @@ function endGame() {
     document.getElementById("b4").remove()
     document.getElementById("message").remove()
     // add score print out
-    
+    var scorePrint = document.createElement("div");
+    scorePrint.textContent = "You scored: " + score + " points";
+    scorePrint.className = "intro";
+    document.getElementById("question").appendChild(scorePrint);
+  
     // addform for initials
 
     //var form = document.createElement("form")

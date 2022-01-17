@@ -62,3 +62,8 @@ header {
     color: #4D5359;
     font-size: 35px;
 }
+
+.intro {
+    font-size: 20px;
+    font-weight: lighter;
+}
