@@ -3,7 +3,7 @@ var mainEl = document.getElementById('main');
 var score = 0;
 var i = 0;
 var timeLeft = 75;
-var highScore = ""
+var highScore = []
 
 // button to begin the timer
 var buttonEl = document.querySelector("#proceed-button");
@@ -205,23 +205,53 @@ function endGame() {
     document.getElementById("question").appendChild(scorePrint);
   
     // addform for initials
-    var form = document.createElement("form");
+    var formEl = document.createElement("form");
     //form.setAttribute(score, "initials");
-    var initials = document.createElement("input");
-    initials.setAttribute("type", "text");
-    initials.setAttribute("name", "initial");
-    initials.setAttribute("placeholder", "Initials");
-    var submit = document.createElement("input");
-    submit.setAttribute("type", "submit");
-    submit.setAttribute("value", "Submit");
-    document.getElementById("results").appendChild(form);
-    form.appendChild(initials);
-    form.appendChild(submit);
-  
-    // need to take initials, add it with the high score, and save it to the resultsPage
+    var initialsEl = document.createElement("input");
+    initialsEl.setAttribute("type", "text");
+    initialsEl.setAttribute("name", "initial");
+    initialsEl.setAttribute("placeholder", "Initials");
+    initialsEl.setAttribute("value", "");
+    var submitEl = document.createElement("button");
+    submitEl.textContent = "Submit";
+    submitEl.setAttribute("type", "submit");
+    submitEl.id = "submit";
+    document.getElementById("results").appendChild(formEl);
+    formEl.appendChild(initialsEl);
+    formEl.appendChild(submitEl);
+    
+    // event listener: when initial submit button is pressed...
+    formEl.addEventListener("submit", highScoreHandler);
+};
 
+    //function to create the highScore Object 
+    var highScoreHandler = function (event) {
+        event.preventDefault();
+        var initialsInput = document.querySelector("input[name='initial']").value;
+        var scoreInput = document.querySelector("score").value;
     
-    //var form = document.createElement("form")
-}
+        function addHighScore(highScoreObj) {
+            
+            var highScoreListEl = document.createElement("li");
+            highScoreListEl.textContent = highScoreObj;
+            highScoreListEl.className = "high-score-item";
+            results.appendChild(highScoreListEl);
+            var highScoreObj = {
+                name: initialsInput, 
+                scorePrint: scoreInput,
+        };
+        }
     
+        if (!initialsInput) {
+            alert("You must provide your initials!");
+            return false;
+        }
+    
+         
+        
+        addHighScore.push(highScoreObj);
+        console.log(highScoreObj)
+    }
+
+  
 //function resultsPage() 
