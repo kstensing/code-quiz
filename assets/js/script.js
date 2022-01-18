@@ -1,6 +1,7 @@
 var timerEl = document.getElementById('countdown');
 var mainEl = document.getElementById('main');
 var score = 0;
+
 var i = 0;
 var timeLeft = 75;
 var highScore = []
@@ -183,10 +184,7 @@ function startGame() {
     if (questionBank[i].correctAnswer !== 3) {
         button3.addEventListener("click", incorrect)
     }
-
 } 
-
-
 
 function endGame() {
     // changing question to say "All done!"
@@ -225,33 +223,28 @@ function endGame() {
 };
 
     //function to create the highScore Object 
-    var highScoreHandler = function (event) {
-        event.preventDefault();
-        var initialsInput = document.querySelector("input[name='initial']").value;
-        var scoreInput = document.querySelector("score").value;
-    
-        function addHighScore(highScoreObj) {
-            
-            var highScoreListEl = document.createElement("li");
-            highScoreListEl.textContent = highScoreObj;
-            highScoreListEl.className = "high-score-item";
-            results.appendChild(highScoreListEl);
-            var highScoreObj = {
-                name: initialsInput, 
-                scorePrint: scoreInput,
-        };
-        }
-    
-        if (!initialsInput) {
-            alert("You must provide your initials!");
-            return false;
-        }
-    
-         
-        
-        addHighScore.push(highScoreObj);
-        console.log(highScoreObj)
-    }
+var highScoreHandler = function (event) {
+    event.preventDefault();
+    var initialsInput = document.querySelector("input[name='initial']").value;
+    //var scoreInput = score;
+    var highScoreObj = {
+        name: initialsInput, 
+        scorePrint: score.toString(),
+    };
 
-  
+    var highScoreListEl = document.createElement("li");
+    highScoreListEl.textContent = highScoreObj.name + " scored " + highScoreObj.scorePrint;
+    highScoreListEl.className = "high-score-item";
+    results.appendChild(highScoreListEl);
+
+    if (!initialsInput) {
+        alert("You must provide your initials!");
+        return false;
+    }
+    
+    highScoreObj.push(highScoreObj); 
+    console.log(highScoreObj)       
+};
+
+
 //function resultsPage() 
