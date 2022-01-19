@@ -34,51 +34,30 @@ function countdown() {
 
  
 var questionBank = [
-
     { 
-    questionText: "What does 'DOM' stand for?",
-    options: ["Designated Operating Model", "Document Object Model", "Deliberate Operations Module", "Documented Objective Mode"],
-    correctAnswer: 1
+    questionText: "Commonly used data types do not include:",
+    options: ["1. strings", "2. booleans", "3. alerts", "4. numbers"],
+    correctAnswer: 2
     },
     { 
-    questionText: "What is an event listener used for?",
-    options: ["the observation of an event", "data", "a response to an event", "create an HTML element"],
-    correctAnswer: 0
+    questionText: "The condition in an if/else statement is enclosed with_______.",
+    options: ["1. quotes", "2. curly brackets", "3. parenthesis", "4. square brackets"],
+    correctAnswer: 2
     },
     { 
-    questionText: "question 3?",
-    options: ["Dsdfel", "Dsfodel", "DeliberatsdfModule", "DocumsdfMode"],
-    correctAnswer: 1
+    questionText: "Arrays in JavaScript can be used to store:",
+    options: ["1. numbers and strings", "2. other arrays", "3. booleans", "4. all of the above"],
+    correctAnswer: 3
     },
     { 
-    questionText: "question 4?",
-    options: ["ya", "ok", "raer", "dsfa"],
-    correctAnswer: 1
+    questionText: "String values must be enclosed within _______ when being assigned to variables.",
+    options: ["1. commas", "2. curly brackets", "3. quotes", "4. parenthesis"],
+    correctAnswer: 2
     },
     { 
-    questionText: "question 5?",
-    options: ["Desigfsdodel", "Docufdt Model", "Deliberasdfations Module", "Docufdstive Mode"],
-    correctAnswer: 1
-    },
-    { 
-    questionText: "sadf?",
-    options: ["Desasdf Model", "Documeadfodel", "Deliberatfds Module", "Documensdfe Mode"],
-    correctAnswer: 1
-    },
-    { 
-    questionText: "What does 'DOM' stand for?",
-    options: ["Designated Operating Model", "Document Object Model", "Deliberate Operations Module", "Documented Objective Mode"],
-    correctAnswer: 1
-    },
-    { 
-    questionText: "What does 'DOM' stand for?",
-    options: ["Designated Operating Model", "Document Object Model", "Deliberate Operations Module", "Documented Objective Mode"],
-    correctAnswer: 1
-    },
-    { 
-    questionText: "What does 'DOM' stand for?",
-    options: ["Designated Operating Model", "Document Object Model", "Deliberate Operations Module", "Documented Objective Mode"],
-    correctAnswer: 1
+    questionText: "A very useful tool in during development and debugging for printing content to the debugger is:",
+    options: ["1. JavaScript", "2. terminal/bash", "3. for loops", "4. console.log"],
+    correctAnswer: 3
     },
 ];
 
@@ -86,14 +65,14 @@ var questionBank = [
 
 function nextQuestion() {
     // if i is less than the questionBank, continue on to the next question
+    i++;
     if (i < questionBank.length) {
-        i++;
         document.getElementById("question").innerText = questionBank[i].questionText
         document.getElementById("b1").innerText = questionBank[i].options[0]
         document.getElementById("b2").innerText = questionBank[i].options[1]
         document.getElementById("b3").innerText = questionBank[i].options[2]
         document.getElementById("b4").innerText = questionBank[i].options[3]
-     
+       
     } else {
         endGame()
     }
@@ -198,7 +177,7 @@ function endGame() {
     document.getElementById("message").remove()
     // add score print out
     var scorePrint = document.createElement("div");
-    scorePrint.textContent = "You scored: " + score + " points";
+    scorePrint.textContent = "Your final score is " + score + ".";
     scorePrint.className = "intro";
     document.getElementById("question").appendChild(scorePrint);
   
@@ -222,6 +201,7 @@ function endGame() {
     formEl.addEventListener("submit", highScoreHandler);
 };
 
+
     //function to create the highScore Object 
 var highScoreHandler = function (event) {
     event.preventDefault();
@@ -229,21 +209,29 @@ var highScoreHandler = function (event) {
     //var scoreInput = score;
     var highScoreObj = {
         name: initialsInput, 
-        scorePrint: score.toString(),
+        scoreOf: score.toString(),
     };
-
-    var highScoreListEl = document.createElement("li");
-    highScoreListEl.textContent = highScoreObj.name + " scored " + highScoreObj.scorePrint;
-    highScoreListEl.className = "high-score-item";
-    results.appendChild(highScoreListEl);
 
     if (!initialsInput) {
         alert("You must provide your initials!");
         return false;
-    }
+    };
+
+    var highScoreListEl = document.createElement("li");
+    highScoreListEl.textContent = highScoreObj.name + " - " + highScoreObj.scoreOf;
+    highScoreListEl.className = "high-score-item";
+    results.appendChild(highScoreListEl);
+
     
-    highScoreObj.push(highScoreObj); 
-    console.log(highScoreObj)       
+    
+    localStorage.setItem("highScores", JSON.stringify(highScoreObj));
+    var highScores = localStorage.getItem("highScores");
+    highScores.id = "highScores";
+    document.querySelector("highScores").value;
+    highScoresList.appendChild(highScores);
+    
+
+    //savedHighScores = JSON.parse(savedHighScores);
 };
 
 

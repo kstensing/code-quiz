@@ -1,5 +1,5 @@
 :root {
-    --primary-color: #F8EDEB;
+    --primary-color: white;
     --secondary-color:#D8E2DC;
     --tertiary-color: #4D5359;
     --primary-font: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -18,15 +18,23 @@ body {
 
 button {
     padding: 10px;
-    margin: 5px;
+    margin: 15px;
     cursor: pointer;
-    font-size: 22px;
+    font-size: 20px;
+    border-radius: 10px;
+    background-color: #4B3570;
+    color: white;
+}
+
+button:hover {
+    background-color: #C589E8;
 }
 
 header {
     text-align: right;
     margin: 15px auto;
     padding: 15px;
+    
 }
 
 .quiz-contents p {
@@ -55,12 +63,14 @@ header {
 .title p {
     font-size: 20px;
     font-weight: lighter;
+    color: gray;
 }
 
 .message {
     text-align: center;
-    color: #4D5359;
-    font-size: 35px;
+    color: gray;
+    margin: 10px;
+    font-size: 30px;
 }
 
 .intro {
