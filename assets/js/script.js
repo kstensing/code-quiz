@@ -21,13 +21,17 @@ function countdown() {
         timerEl.textContent = "Time: " + timeLeft + " seconds"
         timeLeft--;
 
-        if (timeLeft <= -1) {
+        if (timeLeft <= -1 || timeLeft === 0) {
             timerEl.textContent = "Time's up!";
             clearInterval(timeInterval);
             endGame()
-        }
-    } ,1000);
+        } 
+    }, 1000);
 };
+
+function stopTime() {
+
+}
  
 var questionBank = [
     { 
@@ -105,6 +109,7 @@ function nextQuestion() {
         }
        
     } else {
+        timeLeft = 0
         endGame()
     }
 
