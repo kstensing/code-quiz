@@ -17,7 +17,7 @@ Click this [LINK](https://kstensing.github.io/code-quiz/) for the landing page.
 
 The landing page should resemble the image below: 
 
-![Landing Page](Assets/images/Capture.JPG)
+![Landing Page](Assets/images/capture.JPG)
 
 
 
