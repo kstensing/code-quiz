@@ -1,10 +1,9 @@
 var timerEl = document.getElementById('countdown');
 var mainEl = document.getElementById('main');
 var score = 0;
-
 var i = 0;
 var timeLeft = 75;
-var highScore = []
+var scores = []
 
 // button to begin the timer
 var buttonEl = document.querySelector("#proceed-button");
@@ -20,18 +19,13 @@ function countdown() {
         timerEl.textContent = "Time: " + timeLeft + " seconds"
         timeLeft--;
 
-        if (timeLeft <= -1) {
-            timerEl.textContent = "Time's up!";
+        if (timeLeft <= -1 || timeLeft === 0) {
+            timerEl.textContent = "Game over!";
             clearInterval(timeInterval);
             endGame()
-        }
-    } ,1000);
-}
-
-// var testQue = Object.keys(answer1);
-// console.log(testQue)
-
-
+        } 
+    }, 1000);
+};
  
 var questionBank = [
     { 
@@ -61,8 +55,6 @@ var questionBank = [
     },
 ];
 
-
-
 function nextQuestion() {
     // if i is less than the questionBank, continue on to the next question
     i++;
@@ -72,13 +64,48 @@ function nextQuestion() {
         document.getElementById("b2").innerText = questionBank[i].options[1]
         document.getElementById("b3").innerText = questionBank[i].options[2]
         document.getElementById("b4").innerText = questionBank[i].options[3]
+
+        switch (questionBank[i].correctAnswer) {
+            case 0:
+                document.getElementById("b1").removeEventListener("click", incorrect);
+                document.getElementById("b1").addEventListener("click", correct);
+                break;
+            case 1:
+                document.getElementById("b2").removeEventListener("click", incorrect);
+                document.getElementById("b2").addEventListener("click", correct);            
+                break;
+            case 2:
+                document.getElementById("b3").removeEventListener("click", incorrect);
+                document.getElementById("b3").addEventListener("click", correct);
+                break;
+            case 3:
+                document.getElementById("b4").removeEventListener("click", correct);
+                document.getElementById("b4").addEventListener("click", correct);
+                break;
+        } 
+    
+        // add event listeners to the buttons to move to the "incorrect" function when the incorrect answer button is selected
+        if (questionBank[i].correctAnswer !== 0) {
+            document.getElementById("b1").removeEventListener("click", correct);
+            document.getElementById("b1").addEventListener("click", incorrect);
+        } 
+        if (questionBank[i].correctAnswer !== 1) {
+            document.getElementById("b2").removeEventListener("click", correct);
+            document.getElementById("b2").addEventListener("click", incorrect);
+        } 
+        if (questionBank[i].correctAnswer !== 2) {
+            document.getElementById("b3").removeEventListener("click", correct);
+            document.getElementById("b3").addEventListener("click", incorrect);
+        } 
+        if (questionBank[i].correctAnswer !== 3) {
+            document.getElementById("b4").removeEventListener("click", correct);
+            document.getElementById("b4").addEventListener("click", incorrect);
+        }
        
     } else {
-        endGame()
+        timeLeft = 0
     }
-
 };
-
 
 function correct() {
     // element to appear that says "correct!"
@@ -135,6 +162,7 @@ function startGame() {
     document.getElementById("proceed-button").remove()
 
     // add event listeners to know when the correct answer is hit to proceed with the "correct" function
+    
     switch (questionBank[i].correctAnswer) {
         case 0:
             button0.addEventListener("click", correct);
@@ -163,18 +191,18 @@ function startGame() {
     if (questionBank[i].correctAnswer !== 3) {
         button3.addEventListener("click", incorrect)
     }
-} 
+}; 
 
 function endGame() {
     // changing question to say "All done!"
     document.getElementById("question").innerText = "All done!"
 
     // remove the buttons
-    document.getElementById("b1").remove()
-    document.getElementById("b2").remove()
-    document.getElementById("b3").remove()
-    document.getElementById("b4").remove()
-    document.getElementById("message").remove()
+    document.getElementById("b1").remove();
+    document.getElementById("b2").remove();
+    document.getElementById("b3").remove();
+    document.getElementById("b4").remove();
+    document.getElementById("message").remove();
     // add score print out
     var scorePrint = document.createElement("div");
     scorePrint.textContent = "Your final score is " + score + ".";
@@ -189,6 +217,7 @@ function endGame() {
     initialsEl.setAttribute("name", "initial");
     initialsEl.setAttribute("placeholder", "Initials");
     initialsEl.setAttribute("value", "");
+    initialsEl.id = "initialsInput"
     var submitEl = document.createElement("button");
     submitEl.textContent = "Submit";
     submitEl.setAttribute("type", "submit");
@@ -201,38 +230,66 @@ function endGame() {
     formEl.addEventListener("submit", highScoreHandler);
 };
 
+var refreshPage = function () {
+    refreshPage = location.reload();    
+};
 
+var clearScores = function () {
+    localStorage.removeItem("highScores");
+    document.getElementById("highScoreLiId").remove();
+
+};
     //function to create the highScore Object 
 var highScoreHandler = function (event) {
     event.preventDefault();
+    document.getElementById("question").innerText = "High scores"
+    document.getElementById("submit").remove();
+    
+    // go back button
+    var refreshEl = document.createElement("button");
+    refreshEl.textContent = "Go back";
+    refreshEl.id = "refresh";
+    refreshEl.setAttribute("type", "submit");
+    document.getElementById("results").appendChild(refreshEl);
+    refreshEl.addEventListener("click", refreshPage, false);
+
+     // clear high scores button
+     var clearEl = document.createElement("button");
+     clearEl.textContent = "Clear high scores";
+     clearEl.id = "clear";
+     clearEl.setAttribute("type", "submit");
+     document.getElementById("results").appendChild(clearEl);
+     clearEl.addEventListener("click", clearScores);
+
+
     var initialsInput = document.querySelector("input[name='initial']").value;
-    //var scoreInput = score;
-    var highScoreObj = {
-        name: initialsInput, 
-        scoreOf: score.toString(),
-    };
+    var scoreObj =
+        {  
+            name: initialsInput, 
+            scoreOf: score.toString(),
+        };
 
     if (!initialsInput) {
         alert("You must provide your initials!");
         return false;
     };
 
-    var highScoreListEl = document.createElement("li");
-    highScoreListEl.textContent = highScoreObj.name + " - " + highScoreObj.scoreOf;
-    highScoreListEl.className = "high-score-item";
-    results.appendChild(highScoreListEl);
-
-    
-    
-    localStorage.setItem("highScores", JSON.stringify(highScoreObj));
     var highScores = localStorage.getItem("highScores");
-    highScores.id = "highScores";
-    document.querySelector("highScores").value;
-    highScoresList.appendChild(highScores);
+    var highScore = JSON.parse(highScores);
+
+    if (highScore == null) {
+        highScore = [];
+    };
     
-
-    //savedHighScores = JSON.parse(savedHighScores);
+    highScore.push(scoreObj);
+    
+    for (var i = 0; i < highScore.length; i++) {
+        var highScoreLi = document.createElement("li");
+        highScoreLi.id = "highScoreLiId";
+        highScoreLi.textContent = highScore[i].name + " - " + highScore[i].scoreOf;
+        document.getElementById("results").appendChild(highScoreLi);
+    };
+    
+    localStorage.setItem("highScores", JSON.stringify(highScore));
+    document.getElementById("initialsInput").remove()
 };
-
-
-//function resultsPage() 

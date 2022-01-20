@@ -24,6 +24,7 @@ button {
     border-radius: 10px;
     background-color: #4B3570;
     color: white;
+    display: center;
 }
 
 button:hover {
@@ -76,4 +77,8 @@ header {
 .intro {
     font-size: 20px;
     font-weight: lighter;
+}
+
+li {
+    background-color: #AFA4CB;
 }
