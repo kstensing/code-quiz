@@ -204,13 +204,17 @@ function endGame() {
 var refreshPage = function () {
     refreshPage = location.reload();    
 };
+
+var clearScores = function () {
+    localStorage.removeItem("highScores");
+    document.getElementById("highScoreLiId").remove();
+
+};
     //function to create the highScore Object 
 var highScoreHandler = function (event) {
     event.preventDefault();
     document.getElementById("question").innerText = "High scores"
-    document.getElementById("submit").remove()
-    
-
+    document.getElementById("submit").remove();
     
     // go back button
     var refreshEl = document.createElement("button");
@@ -219,6 +223,15 @@ var highScoreHandler = function (event) {
     refreshEl.setAttribute("type", "submit");
     document.getElementById("results").appendChild(refreshEl);
     refreshEl.addEventListener("click", refreshPage, false);
+
+     // clear high scores button
+     var clearEl = document.createElement("button");
+     clearEl.textContent = "Clear high scores";
+     clearEl.id = "clear";
+     clearEl.setAttribute("type", "submit");
+     document.getElementById("results").appendChild(clearEl);
+     clearEl.addEventListener("click", clearScores);
+
 
     var initialsInput = document.querySelector("input[name='initial']").value;
     var scoreObj =
@@ -243,6 +256,7 @@ var highScoreHandler = function (event) {
     
     for (var i = 0; i < highScore.length; i++) {
         var highScoreLi = document.createElement("li");
+        highScoreLi.id = "highScoreLiId";
         highScoreLi.textContent = highScore[i].name + " - " + highScore[i].scoreOf;
         document.getElementById("results").appendChild(highScoreLi);
     };
