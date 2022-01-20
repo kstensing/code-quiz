@@ -27,12 +27,7 @@ function countdown() {
             endGame()
         }
     } ,1000);
-}
-
-// var testQue = Object.keys(answer1);
-// console.log(testQue)
-
-
+};
  
 var questionBank = [
     { 
@@ -62,8 +57,6 @@ var questionBank = [
     },
 ];
 
-
-
 function nextQuestion() {
     // if i is less than the questionBank, continue on to the next question
     i++;
@@ -73,10 +66,48 @@ function nextQuestion() {
         document.getElementById("b2").innerText = questionBank[i].options[1]
         document.getElementById("b3").innerText = questionBank[i].options[2]
         document.getElementById("b4").innerText = questionBank[i].options[3]
+
+        switch (questionBank[i].correctAnswer) {
+            case 0:
+                document.getElementById("b1").removeEventListener("click", incorrect);
+                document.getElementById("b1").addEventListener("click", correct);
+                break;
+            case 1:
+                document.getElementById("b2").removeEventListener("click", incorrect);
+                document.getElementById("b2").addEventListener("click", correct);            
+                break;
+            case 2:
+                document.getElementById("b3").removeEventListener("click", incorrect);
+                document.getElementById("b3").addEventListener("click", correct);
+                break;
+            case 3:
+                document.getElementById("b4").removeEventListener("click", correct);
+                document.getElementById("b4").addEventListener("click", correct);
+                break;
+        } 
+    
+        // add event listeners to the buttons to move to the "incorrect" function when the incorrect answer button is selected
+        if (questionBank[i].correctAnswer !== 0) {
+            document.getElementById("b1").removeEventListener("click", correct);
+            document.getElementById("b1").addEventListener("click", incorrect);
+        } 
+        if (questionBank[i].correctAnswer !== 1) {
+            document.getElementById("b2").removeEventListener("click", correct);
+            document.getElementById("b2").addEventListener("click", incorrect);
+        } 
+        if (questionBank[i].correctAnswer !== 2) {
+            document.getElementById("b3").removeEventListener("click", correct);
+            document.getElementById("b3").addEventListener("click", incorrect);
+        } 
+        if (questionBank[i].correctAnswer !== 3) {
+            document.getElementById("b4").removeEventListener("click", correct);
+            document.getElementById("b4").addEventListener("click", incorrect);
+        }
        
     } else {
         endGame()
     }
+
 };
 
 function correct() {
@@ -134,6 +165,7 @@ function startGame() {
     document.getElementById("proceed-button").remove()
 
     // add event listeners to know when the correct answer is hit to proceed with the "correct" function
+    
     switch (questionBank[i].correctAnswer) {
         case 0:
             button0.addEventListener("click", correct);
@@ -162,7 +194,7 @@ function startGame() {
     if (questionBank[i].correctAnswer !== 3) {
         button3.addEventListener("click", incorrect)
     }
-} 
+}; 
 
 function endGame() {
     // changing question to say "All done!"
