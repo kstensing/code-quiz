@@ -1,10 +1,8 @@
 var timerEl = document.getElementById('countdown');
 var mainEl = document.getElementById('main');
 var score = 0;
-
 var i = 0;
 var timeLeft = 75;
-var highScore = []
 var scores = []
 
 // button to begin the timer
@@ -22,16 +20,12 @@ function countdown() {
         timeLeft--;
 
         if (timeLeft <= -1 || timeLeft === 0) {
-            timerEl.textContent = "Time's up!";
+            timerEl.textContent = "Game over!";
             clearInterval(timeInterval);
             endGame()
         } 
     }, 1000);
 };
-
-function stopTime() {
-
-}
  
 var questionBank = [
     { 
@@ -110,9 +104,7 @@ function nextQuestion() {
        
     } else {
         timeLeft = 0
-        endGame()
     }
-
 };
 
 function correct() {
@@ -206,11 +198,11 @@ function endGame() {
     document.getElementById("question").innerText = "All done!"
 
     // remove the buttons
-    document.getElementById("b1").remove()
-    document.getElementById("b2").remove()
-    document.getElementById("b3").remove()
-    document.getElementById("b4").remove()
-    document.getElementById("message").remove()
+    document.getElementById("b1").remove();
+    document.getElementById("b2").remove();
+    document.getElementById("b3").remove();
+    document.getElementById("b4").remove();
+    document.getElementById("message").remove();
     // add score print out
     var scorePrint = document.createElement("div");
     scorePrint.textContent = "Your final score is " + score + ".";
@@ -301,7 +293,3 @@ var highScoreHandler = function (event) {
     localStorage.setItem("highScores", JSON.stringify(highScore));
     document.getElementById("initialsInput").remove()
 };
-
-
-
-//function resultsPage() 
