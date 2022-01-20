@@ -5,6 +5,7 @@ var score = 0;
 var i = 0;
 var timeLeft = 75;
 var highScore = []
+var scores = []
 
 // button to begin the timer
 var buttonEl = document.querySelector("#proceed-button");
@@ -76,9 +77,7 @@ function nextQuestion() {
     } else {
         endGame()
     }
-
 };
-
 
 function correct() {
     // element to appear that says "correct!"
@@ -189,6 +188,7 @@ function endGame() {
     initialsEl.setAttribute("name", "initial");
     initialsEl.setAttribute("placeholder", "Initials");
     initialsEl.setAttribute("value", "");
+    initialsEl.id = "initialsInput"
     var submitEl = document.createElement("button");
     submitEl.textContent = "Submit";
     submitEl.setAttribute("type", "submit");
@@ -201,38 +201,56 @@ function endGame() {
     formEl.addEventListener("submit", highScoreHandler);
 };
 
-
+var refreshPage = function () {
+    refreshPage = location.reload();    
+};
     //function to create the highScore Object 
 var highScoreHandler = function (event) {
     event.preventDefault();
+    document.getElementById("question").innerText = "High scores"
+    document.getElementById("submit").remove()
+    
+
+    
+    // go back button
+    var refreshEl = document.createElement("button");
+    refreshEl.textContent = "Go back";
+    refreshEl.id = "refresh";
+    refreshEl.setAttribute("type", "submit");
+    document.getElementById("results").appendChild(refreshEl);
+    refreshEl.addEventListener("click", refreshPage, false);
+
     var initialsInput = document.querySelector("input[name='initial']").value;
-    //var scoreInput = score;
-    var highScoreObj = {
-        name: initialsInput, 
-        scoreOf: score.toString(),
-    };
+    var scoreObj =
+        {  
+            name: initialsInput, 
+            scoreOf: score.toString(),
+        };
 
     if (!initialsInput) {
         alert("You must provide your initials!");
         return false;
     };
 
-    var highScoreListEl = document.createElement("li");
-    highScoreListEl.textContent = highScoreObj.name + " - " + highScoreObj.scoreOf;
-    highScoreListEl.className = "high-score-item";
-    results.appendChild(highScoreListEl);
-
-    
-    
-    localStorage.setItem("highScores", JSON.stringify(highScoreObj));
     var highScores = localStorage.getItem("highScores");
-    highScores.id = "highScores";
-    document.querySelector("highScores").value;
-    highScoresList.appendChild(highScores);
-    
+    var highScore = JSON.parse(highScores);
 
-    //savedHighScores = JSON.parse(savedHighScores);
+    if (highScore == null) {
+        highScore = [];
+    };
+    
+    highScore.push(scoreObj);
+    
+    for (var i = 0; i < highScore.length; i++) {
+        var highScoreLi = document.createElement("li");
+        highScoreLi.textContent = highScore[i].name + " - " + highScore[i].scoreOf;
+        document.getElementById("results").appendChild(highScoreLi);
+    };
+    
+    localStorage.setItem("highScores", JSON.stringify(highScore));
+    document.getElementById("initialsInput").remove()
 };
+
 
 
 //function resultsPage() 

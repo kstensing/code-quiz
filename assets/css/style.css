@@ -77,3 +77,7 @@ header {
     font-size: 20px;
     font-weight: lighter;
 }
+
+li {
+    background-color: #AFA4CB;
+}
